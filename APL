@@ -1,0 +1,18 @@
+import requests
+
+client_id = "100"
+api_key = "fs23hDtETbKJn3JL323hJYbLXD6yDarZ"
+base_url = "https://api.recruitment.shq.nz"
+
+# Fetch domains
+domains_url = f"{base_url}/domains/{client_id}?api_key={api_key}"
+domains_response = requests.get(domains_url)
+domains_data = domains_response.json()
+
+# Fetch DNS records for each domain
+for domain in domains_data:
+    zone_id = domain.get("zone_id")
+    zones_url = f"{base_url}/zones/{zone_id}?api_key={api_key}"
+    zones_response = requests.get(zones_url)
+    zones_data = zones_response.json()
+    print(zones_data)
